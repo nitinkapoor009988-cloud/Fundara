@@ -8,7 +8,7 @@ use soroban_sdk::{
 
 mod campaign_core_wasm {
     soroban_sdk::contractimport!(
-        file = "../../build_target/wasm32-unknown-unknown/release/campaign_core.wasm"
+        file = "../../target/wasm32-unknown-unknown/release/campaign_core.wasm"
     );
 }
 
