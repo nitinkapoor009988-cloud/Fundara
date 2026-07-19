@@ -9,8 +9,6 @@ jobs:
   contracts:
     name: Contract Verification
     runs-on: ubuntu-latest
-    env:
-      RUSTFLAGS: "-C target-feature=-reference-types"
     steps:
       - uses: actions/checkout@v4
       - name: Install Rust
