@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, PlusCircle, CheckCircle } from "lucide-react";
+import { ArrowRight, PlusCircle } from "lucide-react";
 import { getWalletKit } from "@/utils/walletKit";
 import { getCampaigns, CampaignItem } from "@/utils/campaignStore";
 

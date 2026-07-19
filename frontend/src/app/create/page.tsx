@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { getWalletKit } from "@/utils/walletKit";
 import { saveCampaign } from "@/utils/campaignStore";
 import { signTransaction } from "@stellar/freighter-api";
-import { rpc, TransactionBuilder, Networks, Address, xdr, nativeToScVal, Operation, BASE_FEE, Asset } from "@stellar/stellar-sdk";
+import { rpc, TransactionBuilder, Networks, Operation, BASE_FEE, Asset, Account } from "@stellar/stellar-sdk";
 
 export default function CreateCampaign() {
   const router = useRouter();
@@ -32,16 +32,12 @@ export default function CreateCampaign() {
       }
 
       const server = new rpc.Server("https://soroban-testnet.stellar.org");
-      let sourceAccount;
+      let sourceAccount: Account;
 
       try {
         sourceAccount = await server.getAccount(address);
       } catch {
-        sourceAccount = {
-          accountId: () => address,
-          sequenceNumber: () => "1",
-          incrementSequenceNumber: () => {}
-        } as any;
+        sourceAccount = new Account(address, "1");
       }
 
       // Build real transaction to submit to Freighter
@@ -60,13 +56,14 @@ export default function CreateCampaign() {
       .build();
 
       // REAL FREIGHTER POPUP FOR CREATION
-      let signedResult: any = null;
+      let signedResult: Record<string, string> | string = "";
       try {
         signedResult = await signTransaction(tx.toXDR(), {
           networkPassphrase: Networks.TESTNET,
         });
-      } catch (walletErr: any) {
-        throw new Error(walletErr?.message || walletErr || "Wallet signature rejected.");
+      } catch (walletErr: unknown) {
+        const msg = walletErr instanceof Error ? walletErr.message : "Wallet signature rejected.";
+        throw new Error(msg);
       }
 
       const signedXdr = typeof signedResult === "string" 
@@ -89,8 +86,9 @@ export default function CreateCampaign() {
 
       // Redirect to Dashboard where user's campaigns are listed!
       router.push("/dashboard");
-    } catch (err: any) {
-      setError(err?.message || err || "Failed to create campaign in wallet.");
+    } catch (err: unknown) {
+      const errMsg = err instanceof Error ? err.message : "Failed to create campaign in wallet.";
+      setError(errMsg);
     } finally {
       setLoading(false);
     }

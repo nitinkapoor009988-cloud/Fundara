@@ -33,8 +33,9 @@ export default function WalletModal({ isOpen, onClose, onSelectWallet }: WalletM
       } else {
         setError("Freighter Extension missing. Please install Freighter from freighter.app");
       }
-    } catch (e: any) {
-      setError(e.message || "Failed to connect Freighter");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Failed to connect Freighter";
+      setError(message);
     } finally {
       setLoadingWallet(null);
     }
@@ -53,7 +54,7 @@ export default function WalletModal({ isOpen, onClose, onSelectWallet }: WalletM
         onSelectWallet(demoAlbedoKey, "Albedo Web");
         onClose();
       }, 1200);
-    } catch (e: any) {
+    } catch {
       setError("Albedo popup blocked or failed.");
     } finally {
       setLoadingWallet(null);
@@ -69,7 +70,7 @@ export default function WalletModal({ isOpen, onClose, onSelectWallet }: WalletM
         onSelectWallet(demoXbullKey, "xBull Wallet");
         onClose();
       }, 1000);
-    } catch (e: any) {
+    } catch {
       setError("xBull wallet connection failed.");
     } finally {
       setLoadingWallet(null);
@@ -85,7 +86,7 @@ export default function WalletModal({ isOpen, onClose, onSelectWallet }: WalletM
         onSelectWallet(demoLobstrKey, "LOBSTR Wallet");
         onClose();
       }, 1000);
-    } catch (e: any) {
+    } catch {
       setError("Lobstr connection failed.");
     } finally {
       setLoadingWallet(null);

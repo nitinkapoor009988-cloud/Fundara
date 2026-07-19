@@ -13,22 +13,20 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    checkConnection();
-  }, []);
-
-  const checkConnection = async () => {
-    try {
-      const kit = getWalletKit();
-      const { address } = await kit.getAddress();
-      if (address) {
+    let isMounted = true;
+    const kit = getWalletKit();
+    kit.getAddress().then(({ address }) => {
+      if (address && isMounted) {
         setPubKey(address);
         const name = localStorage.getItem("stellar_wallet_name") || "Wallet";
         setWalletName(name);
       }
-    } catch (e) {
-      // not connected
-    }
-  };
+    }).catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleSelectWallet = (address: string, name: string) => {
     const kit = getWalletKit();

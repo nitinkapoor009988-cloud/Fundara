@@ -1,4 +1,4 @@
-import { isConnected, requestAccess, getAddress as freighterGetAddress } from "@stellar/freighter-api";
+import { isConnected, getAddress as freighterGetAddress } from "@stellar/freighter-api";
 
 class CustomWalletKit {
   private activeWallet: string = "Freighter";

@@ -42,7 +42,7 @@ export const getCampaigns = (): CampaignItem[] => {
       return DEFAULT_CAMPAIGNS;
     }
     return JSON.parse(stored);
-  } catch (e) {
+  } catch {
     return DEFAULT_CAMPAIGNS;
   }
 };

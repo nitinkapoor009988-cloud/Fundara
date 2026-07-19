@@ -1,16 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Clock, Target } from "lucide-react";
 import { getCampaigns, CampaignItem } from "@/utils/campaignStore";
 
 export default function Home() {
-  const [campaignsList, setCampaignsList] = useState<CampaignItem[]>([]);
-
-  useEffect(() => {
-    setCampaignsList(getCampaigns());
-  }, []);
+  const [campaignsList] = useState<CampaignItem[]>(() => getCampaigns());
+  const [now] = useState<number>(() => Date.now());
 
   return (
     <div>
@@ -24,7 +21,7 @@ export default function Home() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {campaignsList.map((c) => {
           const percent = Math.min(100, Math.round((c.raised / c.goal) * 100));
-          const daysLeft = Math.max(0, Math.ceil((c.deadline - Date.now()) / 86400000));
+          const daysLeft = Math.max(0, Math.ceil((c.deadline - now) / 86400000));
           
           return (
             <div key={c.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition">

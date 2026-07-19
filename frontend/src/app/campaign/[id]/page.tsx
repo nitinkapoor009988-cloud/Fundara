@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "next/navigation";
 import { getWalletKit } from "@/utils/walletKit";
 import { getCampaigns, CampaignItem } from "@/utils/campaignStore";
@@ -14,27 +14,26 @@ export default function CampaignDetail() {
   const [loading, setLoading] = useState(false);
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState<{type: 'error' | 'success', text: string} | null>(null);
-  const [campaign, setCampaign] = useState<CampaignItem>({
-    id: id || "CC1",
-    title: "Clean Water Initiative",
-    description: "Providing clean drinking water to remote villages in sub-Saharan Africa. This campaign will fund the drilling of 5 new boreholes.",
-    goal: 5000,
-    raised: 1200,
-    deadline: Date.now() + 86400000 * 5,
-    active: true,
-    creator: "GDDENYMOAFCN3VJHMSQORD43DWVKASB3NU4JCHPZI7NPOF2BPTPXSUQY"
-  });
+  const [now] = useState<number>(() => Date.now());
 
-  useEffect(() => {
+  const [campaign, setCampaign] = useState<CampaignItem>(() => {
     const list = getCampaigns();
     const found = list.find((c) => c.id === id);
-    if (found) {
-      setCampaign(found);
-    }
-  }, [id]);
+    if (found) return found;
+    return {
+      id: id || "CC1",
+      title: "Clean Water Initiative",
+      description: "Providing clean drinking water to remote villages in sub-Saharan Africa. This campaign will fund the drilling of 5 new boreholes.",
+      goal: 5000,
+      raised: 1200,
+      deadline: now + 86400000 * 5,
+      active: true,
+      creator: "GDDENYMOAFCN3VJHMSQORD43DWVKASB3NU4JCHPZI7NPOF2BPTPXSUQY"
+    };
+  });
 
   const percent = Math.min(100, Math.round((campaign.raised / campaign.goal) * 100));
-  const daysLeft = Math.max(0, Math.ceil((campaign.deadline - Date.now()) / 86400000));
+  const daysLeft = Math.max(0, Math.ceil((campaign.deadline - now) / 86400000));
 
   const handleContribute = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,13 +94,14 @@ export default function CampaignDetail() {
       .build();
 
       // 5. TRIGGER FREIGHTER POPUP FOR SIGNATURE
-      let signedResult: any = null;
+      let signedResult: Record<string, string> | string = "";
       try {
         signedResult = await signTransaction(tx.toXDR(), {
           networkPassphrase: Networks.TESTNET,
         });
-      } catch (walletErr: any) {
-        throw new Error(walletErr?.message || walletErr || "Wallet signature rejected.");
+      } catch (walletErr: unknown) {
+        const msg = walletErr instanceof Error ? walletErr.message : "Wallet signature rejected.";
+        throw new Error(msg);
       }
 
       // Extract pure string XDR from freighter response object or string
@@ -117,7 +117,7 @@ export default function CampaignDetail() {
       setMessage({ type: 'error', text: "Submitting transaction to Stellar Testnet network..." });
       
       const transactionToSubmit = TransactionBuilder.fromXDR(signedXdr, Networks.TESTNET);
-      const submitResponse = await horizon.submitTransaction(transactionToSubmit as any);
+      const submitResponse = await horizon.submitTransaction(transactionToSubmit as unknown as Parameters<typeof horizon.submitTransaction>[0]);
 
       console.log("Stellar Network Submission Result:", submitResponse);
 
@@ -125,14 +125,15 @@ export default function CampaignDetail() {
       const updatedCampaign = { ...campaign, raised: campaign.raised + Number(amount) };
       setCampaign(updatedCampaign);
 
+      const txHash = submitResponse.hash ? submitResponse.hash.substring(0, 10) : "";
       setMessage({
         type: 'success',
-        text: `🎉 REAL STELLAR TRANSACTION CONFIRMED! ${amount} XLM debited from your wallet on Testnet. Tx Hash: ${submitResponse.hash.substring(0, 10)}...`
+        text: `🎉 REAL STELLAR TRANSACTION CONFIRMED! ${amount} XLM debited from your wallet on Testnet. Tx Hash: ${txHash}...`
       });
       setAmount("");
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error("Contribute error:", e);
-      const errMsg = e.response?.data?.extras?.result_codes?.operations?.join(", ") || e.message || "Transaction failed";
+      const errMsg = e instanceof Error ? e.message : "Transaction failed";
       setMessage({ type: 'error', text: `Transaction Error: ${errMsg}` });
     } finally {
       setLoading(false);
