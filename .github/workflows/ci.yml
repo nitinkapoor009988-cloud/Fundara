@@ -19,10 +19,14 @@ jobs:
           targets: wasm32-unknown-unknown
           
       - name: Build WASM Contracts
-        run: RUSTFLAGS="-C target-cpu=mvp -C target-feature=-reference-types,-simd128,-bulk-memory,-mutable-globals" cargo build --target wasm32-unknown-unknown --release
+        run: cargo build --target wasm32-unknown-unknown --release
+        env:
+          RUSTFLAGS: "-C target-cpu=mvp -C target-feature=-reference-types,-simd128,-bulk-memory,-mutable-globals"
 
       - name: Run Tests
         run: cargo test
+        env:
+          RUSTFLAGS: "-C target-cpu=mvp -C target-feature=-reference-types,-simd128,-bulk-memory,-mutable-globals"
         
   frontend-lint-build:
     name: Frontend Lint & Build

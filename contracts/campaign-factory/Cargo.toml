@@ -12,3 +12,4 @@ campaign-core = { path = "../campaign-core" }
 
 [dev-dependencies]
 soroban-sdk = { workspace = true, features = ["testutils"] }
+campaign-core = { path = "../campaign-core", features = ["testutils"] }
