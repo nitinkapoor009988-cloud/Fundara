@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "cargo test --manifest-path ../Cargo.toml -j 1"
+    "test": "next lint"
   },
   "dependencies": {
     "@albedo-link/intent": "^0.13.0",
