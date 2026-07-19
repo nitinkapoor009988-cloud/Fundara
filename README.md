@@ -74,9 +74,12 @@ Every state change in the contract emits a Soroban event. On the frontend, we ut
 
 ## 📸 Screenshots & Demo
 
-- **Mobile Responsive UI**: [Link to screenshot]
-- **CI/CD Pipeline Green Run**: [Link to screenshot]
-- **Test Output (Passing)**: [Link to screenshot]
+- **Mobile Responsive UI**:
+  ![Mobile Responsive UI](./image.png)
+
+- **Test Output (Passing)**:
+  ![Test Output](./image-1.png)
+
 - **Live Demo Website Link**: [Fundara Live App](https://fundara-chi.vercel.app/)
 - **Demo Video (1-2 min)**: [Watch Demo Video](https://photos.app.goo.gl/jwKTJZykUEoHXyebA)
 
