@@ -19,7 +19,7 @@ jobs:
           targets: wasm32-unknown-unknown
           
       - name: Build WASM Contracts
-        run: cargo build --target wasm32-unknown-unknown --release
+        run: RUSTFLAGS="-C target-cpu=mvp -C target-feature=-reference-types,-simd128,-bulk-memory,-mutable-globals" cargo build --target wasm32-unknown-unknown --release
 
       - name: Run Tests
         run: cargo test
