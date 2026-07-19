@@ -1,0 +1,13 @@
+# Rust build targets
+/target/
+/target_*/
+/build_target*/
+
+# Node & Next.js
+/frontend/node_modules/
+/frontend/.next/
+/frontend/out/
+
+# IDE & OS files
+.DS_Store
+*.log
