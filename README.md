@@ -74,8 +74,9 @@ Every state change in the contract emits a Soroban event. On the frontend, we ut
 
 ## 📸 Screenshots & Demo
 
-- **Mobile Responsive UI**: ![alt text](image.png)
-- **Test Output (Passing)**: ![alt text](image-1.png)
+- **Mobile Responsive UI**: ![Mobile Responsive UI](./image.png)
+- **Test Output (Passing)**: ![Test Output](./image-1.png)
+- **CI/CD Workflow (Passing)**: ![CI/CD Workflow](./image-2.png)
 - **Live Demo Website Link**: [https://fundara-chi.vercel.app/](https://fundara-chi.vercel.app/)
 - **Demo Video (1-2 min)**: [Watch Demo Video](https://photos.app.goo.gl/We9LJBW1VWLQjNNP9)
 
