@@ -70,7 +70,7 @@ Every state change in the contract emits a Soroban event. On the frontend, we ut
 | Campaign Factory | `CDNPA5J2X5PODOALFB2REFPLZE2O5TM5P2OTBZJEDE6PDGF2JZAD7AIY` | [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CDNPA5J2X5PODOALFB2REFPLZE2O5TM5P2OTBZJEDE6PDGF2JZAD7AIY) |
 | Campaign Core (Wasm) | `CBK5YJBZ5HGWEMVE3YMBX4FSBM55FLQI5AVIEPF2IUYM35REV2SU6BLW` | [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CBK5YJBZ5HGWEMVE3YMBX4FSBM55FLQI5AVIEPF2IUYM35REV2SU6BLW) |
 
-**Example Transaction Hash**: `TODO: Add tx hash after testnet deployment`
+**Contract Transaction Link**: [View Contract History on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CDNPA5J2X5PODOALFB2REFPLZE2O5TM5P2OTBZJEDE6PDGF2JZAD7AIY)
 
 ## 📸 Screenshots & Demo
 
