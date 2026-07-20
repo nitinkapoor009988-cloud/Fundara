@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "test": "next lint"
+    "lint": "eslint .",
+    "test": "eslint ."
   },
   "dependencies": {
     "@albedo-link/intent": "^0.13.0",
