@@ -16,11 +16,13 @@ StellarFund allows users to create fundraising campaigns with a specific goal an
 | Frontend | Next.js, React, Tailwind CSS |
 | Wallet | Freighter API |
 | Network Interaction | `@stellar/stellar-sdk` |
+| CI/CD | GitHub Actions |
 
 ### Level 3 Requirements Checklist
 - [x] **Advanced Smart Contracts**: Dual contract architecture (Factory + Core).
 - [x] **Inter-contract communication**: `campaign-core` calls `campaign-factory` to update status, and `campaign-core` calls the Stellar Asset Contract (SAC) to transfer funds.
 - [x] **Event streaming**: Contract emits structured events (`campaign_created`, `contribution_made`, etc.) and frontend can poll for updates.
+- [x] **CI/CD**: GitHub Actions workflows (`ci.yml` and `deploy.yml`) setup for testing and testnet deployment.
 - [x] **Mobile-responsive frontend**: Tailwind CSS used for breakpoints (`sm:`, `md:`, `lg:`).
 - [x] **Full test coverage**: 10+ tests covering both factory and core contracts.
 - [x] **Complete documentation**: This README detailing architecture, setup, and deployment.
