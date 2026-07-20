@@ -16,13 +16,11 @@ StellarFund allows users to create fundraising campaigns with a specific goal an
 | Frontend | Next.js, React, Tailwind CSS |
 | Wallet | Freighter API |
 | Network Interaction | `@stellar/stellar-sdk` |
-| CI/CD | GitHub Actions |
 
 ### Level 3 Requirements Checklist
 - [x] **Advanced Smart Contracts**: Dual contract architecture (Factory + Core).
 - [x] **Inter-contract communication**: `campaign-core` calls `campaign-factory` to update status, and `campaign-core` calls the Stellar Asset Contract (SAC) to transfer funds.
 - [x] **Event streaming**: Contract emits structured events (`campaign_created`, `contribution_made`, etc.) and frontend can poll for updates.
-- [x] **CI/CD**: GitHub Actions workflow (`ci.yml`) set up for testing and building.
 - [x] **Mobile-responsive frontend**: Tailwind CSS used for breakpoints (`sm:`, `md:`, `lg:`).
 - [x] **Full test coverage**: 10+ tests covering both factory and core contracts.
 - [x] **Complete documentation**: This README detailing architecture, setup, and deployment.
@@ -74,14 +72,10 @@ Every state change in the contract emits a Soroban event. On the frontend, we ut
 
 ## 📸 Screenshots & Demo
 
-- **Mobile Responsive UI**:
-  ![Mobile Responsive UI](./image.png)
-
-- **Test Output (Passing)**:
-  ![Test Output](./image-1.png)
-
-- **Live Demo Website Link**: [Fundara Live App](https://fundara-chi.vercel.app/)
-- **Demo Video (1-2 min)**: [Watch Demo Video](https://photos.app.goo.gl/jwKTJZykUEoHXyebA)
+- **Mobile Responsive UI**: ![alt text](image.png)
+- **Test Output (Passing)**: ![alt text](image-1.png)
+- **Live Demo Website Link**: [Vercel/Netlify URL]
+- **Demo Video (1-2 min)**: [YouTube/Loom URL]
 
 ## ⚠️ Known Limitations / Future Work
 - Support for custom SEP-41 tokens alongside XLM.
