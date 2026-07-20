@@ -76,8 +76,8 @@ Every state change in the contract emits a Soroban event. On the frontend, we ut
 
 - **Mobile Responsive UI**: ![alt text](image.png)
 - **Test Output (Passing)**: ![alt text](image-1.png)
-- **Live Demo Website Link**: [Vercel/Netlify URL]
-- **Demo Video (1-2 min)**: [YouTube/Loom URL]
+- **Live Demo Website Link**: [https://fundara-chi.vercel.app/](https://fundara-chi.vercel.app/)
+- **Demo Video (1-2 min)**: [Watch Demo Video](https://photos.app.goo.gl/We9LJBW1VWLQjNNP9)
 
 ## ⚠️ Known Limitations / Future Work
 - Support for custom SEP-41 tokens alongside XLM.
